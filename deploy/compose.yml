@@ -1,0 +1,31 @@
+services:
+  parking:
+    image: ghcr.io/0b6/domainparking:latest
+    restart: always
+    environment:
+      - CONTACT_EMAIL=sell@404.local
+      - CNAME_TARGET=park.404.local
+      - NS_RECORDS=ns1.404.local,ns2.404.local
+      - SOA_EMAIL=admin@404.local
+      - SOA_PRIMARY=ns1.404.local
+      - DOMAIN_BLACKLIST=404.local
+      - DOMAIN_PATTERNS=^f95b72\..+:CNAME:domainov.aliyun.com,^txttest\..+:TXT:some-text-value
+    ports:
+      - "53:53/udp"
+    logging:
+      options:
+        max-size: "10m"
+        max-file: "3"
+    volumes:
+#      - ${PWD}/template.html:/app/template.html
+  nginx:
+    image: nginx:alpine-slim
+    restart: always
+    ports:
+      - 80:80
+    volumes:
+      - ${PWD}/conf.d:/etc/nginx/conf.d
+    logging:
+      options:
+        max-size: "10m"
+        max-file: "3"
