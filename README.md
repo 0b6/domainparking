@@ -42,8 +42,9 @@ park.404.local.	1	IN	A	10.10.233.1
 ## 使用指南
 
 1. **准备环境**：确保安装Docker并配置域名DNS记录。
-2. **修改配置**：编辑`compose.yml`，按照说明进行调整
+2. **修改配置**：编辑`compose.yml`，按照说明进行调整配置内容。
 3. **启动项目**：在项目根目录运行：
 
    ```bash
-   docker-compose up -d
+   docker compose up -d
+4. **开始停放**: 把想要停放的域名的NS设置成`ns1.404.local,ns2.404.local`即可
